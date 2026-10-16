@@ -16,6 +16,17 @@ body {
   line-height: 1.6;
 }
 
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url("assets/background.png") top left / 1280px 1280px repeat;
+  filter: brightness(0);
+  opacity: 0.225;
+  pointer-events: none;
+  content: "";
+}
+
 .container {
   width: min(1120px, calc(100% - 40px));
   margin: 0 auto;
@@ -53,11 +64,42 @@ body {
   gap: 24px;
 }
 
+.theme-button,
 .start-button,
 .aura-button,
 .filter-button {
   font: inherit;
   cursor: pointer;
+}
+
+.theme-button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #ded6ce;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  font-size: 14px;
+}
+
+.theme-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  opacity: 0.85;
+}
+
+.dark .theme-icon {
+  filter: invert(1);
+  opacity: 0.95;
+}
+
+.theme-button:hover {
+  border-color: #b84027;
 }
 
 a {
@@ -77,7 +119,7 @@ button:focus-visible {
 
 .intro {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 160px minmax(0, 1fr) 160px;
   grid-template-rows: 1fr auto;
   min-height: calc(100vh - 80px);
   min-height: calc(100svh - 80px);
@@ -110,6 +152,66 @@ button:focus-visible {
   width: min-content;
   max-width: 100%;
   justify-self: center;
+}
+
+.side-memes {
+  position: relative;
+  width: 160px;
+  height: 340px;
+}
+
+.intro-meme {
+  position: absolute;
+  display: block;
+  border: 4px solid #fff;
+  border-radius: 18px;
+  object-fit: cover;
+  background: #fff;
+  box-shadow: 0 6px 18px #29272714;
+}
+
+.photo-one {
+  z-index: 1;
+  width: 148px;
+  height: 148px;
+  top: 4px;
+  left: 0;
+  transform: rotate(-12deg);
+  background: #000;
+}
+
+.photo-two {
+  width: 112px;
+  height: 112px;
+  top: 136px;
+  right: 0;
+  transform: rotate(11deg);
+}
+
+.photo-three {
+  width: 96px;
+  height: 96px;
+  bottom: 0;
+  left: 14px;
+  transform: rotate(-8deg);
+}
+
+.photo-four {
+  z-index: 1;
+  width: 140px;
+  height: 140px;
+  top: 18px;
+  right: 0;
+  transform: rotate(11deg);
+  object-position: center bottom;
+}
+
+.photo-five {
+  width: 116px;
+  height: 116px;
+  bottom: 36px;
+  left: 8px;
+  transform: rotate(-10deg);
 }
 
 .start-button,
@@ -360,6 +462,7 @@ h3 {
   overflow-wrap: anywhere;
 }
 
+
 .site-footer {
   padding: 32px 0;
   border-top: 1px solid #e6e1db;
@@ -394,6 +497,74 @@ h3 {
   list-style: none;
 }
 
+body.dark {
+  color-scheme: dark;
+  color: #f3eee9;
+  background: #191715;
+}
+
+.dark .aura::before,
+.dark .aura::after {
+  color: #4d352a;
+}
+
+body.dark::before {
+  filter: none;
+  opacity: 0.325;
+}
+
+.dark .site-header,
+.dark .site-footer,
+.dark .theme-button,
+.dark .aura,
+.dark .meme-card,
+.dark .meme-filter {
+  border-color: #423b35;
+  background: #24211f;
+}
+
+.dark a,
+.dark .aura-count,
+.dark .plus-one {
+  color: #ffab91;
+}
+
+.dark a:hover {
+  color: #ffc4b2;
+}
+
+.dark .intro p,
+.dark .filter-button,
+.dark .site-footer,
+.dark .scroll-button {
+  color: #c6bbb0;
+}
+
+.dark .theme-button:hover {
+  border-color: #ffab91;
+}
+
+.dark .intro-meme {
+  border-color: #423b35;
+}
+
+.dark .meme-image {
+  background: #302b27;
+}
+
+.dark .filter-slider {
+  background: #493127;
+}
+
+.dark .filter-button:hover,
+.dark .filter-button.active {
+  color: #ffb59c;
+}
+
+.dark .footer-authors h2 {
+  color: #f3eee9;
+}
+
 @media (max-width: 900px) {
   .aura {
     grid-template-columns: minmax(0, 1fr) 260px;
@@ -410,8 +581,34 @@ h3 {
   }
 
   .intro {
-    grid-template-columns: 1fr;
+    grid-template-columns: 128px minmax(0, 1fr) 128px;
     gap: 20px;
+  }
+
+  .side-memes {
+    width: 128px;
+    height: 280px;
+  }
+
+  .photo-one,
+  .photo-four {
+    width: 106px;
+    height: 106px;
+  }
+
+  .photo-two,
+  .photo-five {
+    width: 88px;
+    height: 88px;
+  }
+
+  .photo-two {
+    top: 110px;
+  }
+
+  .photo-three {
+    width: 76px;
+    height: 76px;
   }
 
   .meme-grid {
@@ -449,14 +646,77 @@ h3 {
   }
 
   .intro {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 132px 1fr auto;
     padding: 28px 0 24px;
+  }
+
+  .intro-text {
+    grid-column: 1 / -1;
+    grid-row: 2;
   }
 
   h1 {
     font-size: clamp(40px, 9.2vw, 64px);
     letter-spacing: -1.5px;
+  }
+
+  .side-memes {
+    grid-row: 1;
+    width: 100%;
+    max-width: 160px;
+    height: 132px;
+    justify-self: center;
+  }
+
+  .left-memes {
+    grid-column: 1;
+  }
+
+  .right-memes {
+    grid-column: 2;
+  }
+
+  .intro-meme {
+    border-width: 3px;
+    border-radius: 14px;
+  }
+
+  .photo-one {
+    width: 84px;
+    height: 84px;
+    top: 8px;
+  }
+
+  .photo-two {
+    width: 66px;
+    height: 66px;
+    top: 0;
+  }
+
+  .photo-three {
+    width: 54px;
+    height: 54px;
+    left: 52px;
+  }
+
+  .photo-four {
+    width: 88px;
+    height: 88px;
+    top: 4px;
+    right: 8px;
+  }
+
+  .photo-five {
+    width: 64px;
+    height: 64px;
+    bottom: 0;
+    left: 0;
+  }
+
+  .scroll-button {
+    grid-row: 3;
+    white-space: nowrap;
   }
 
   .intro p {

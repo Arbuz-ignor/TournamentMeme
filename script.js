@@ -2,6 +2,36 @@
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
+const themeButton = document.getElementById("theme-button");
+const themeIcon = document.getElementById("theme-icon");
+
+function updateThemeButton() {
+  const isDark = document.body.classList.contains("dark");
+  const label = isDark ? "Включить светлую тему" : "Включить тёмную тему";
+  themeIcon.src = isDark ? "assets/sun.svg" : "assets/moon.svg";
+  themeButton.title = label;
+}
+
+try {
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark");
+  }
+} catch (error) {
+}
+
+updateThemeButton();
+
+themeButton.addEventListener("click", function () {
+  document.body.classList.toggle("dark");
+  updateThemeButton();
+
+  try {
+    const theme = document.body.classList.contains("dark") ? "dark" : "light";
+    localStorage.setItem("theme", theme);
+  } catch (error) {
+  }
+});
+
 const filters = document.querySelectorAll(".filter-button");
 const slider = document.getElementById("filter-slider");
 const cards = document.querySelectorAll(".meme-card");
