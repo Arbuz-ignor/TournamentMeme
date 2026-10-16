@@ -32,9 +32,28 @@
       </a>
     </section>
 
+    <section class="aura" id="aura">
+      <div class="aura-text">
+        <h2>Фарминг ауры</h2>
+        <output class="aura-count" id="aura-count">0</output>
+        <div class="aura-actions" id="aura-actions">
+          <button class="aura-button" id="aura-button" type="button">Сикс-севен!</button>
+        </div>
+      </div>
+      <video class="aura-video" width="720" height="702" autoplay loop muted playsinline disablepictureinpicture disableremoteplayback preload="auto">
+        <source src="assets/six-seven.mp4" type="video/mp4">
+      </video>
+    </section>
+
     <section class="memes" id="memes">
       <div class="memes-heading">
         <h2>Участники турнира</h2>
+        <div class="meme-filter">
+          <span class="filter-slider" id="filter-slider"></span>
+          <button class="filter-button active" type="button" value="all">Все</button>
+          <button class="filter-button" type="button" value="new">Новые</button>
+          <button class="filter-button" type="button" value="classic">Классика</button>
+        </div>
       </div>
       <div class="meme-grid">
         <article class="meme-card new">
